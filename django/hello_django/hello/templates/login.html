@@ -1,0 +1,192 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>登录</title>
+    <style type="text/css">
+        .bg
+        {
+           margin:0;
+           padding:0;
+           width:100%;
+           height: 100%;
+           position:absolute;
+           left:0;
+           top:0;
+           overflow:hidden;
+           background-color:#2f92d5;
+           font-family:微软雅黑;
+           font-size:9pt;
+        }
+        .top
+        {
+            height:24px;
+            color:#d8d8d8;
+            background-color:#1673b2; 
+            padding:8px;
+        }
+        .bottom
+        {
+            color:#d8d8d8;
+            position:absolute;
+            text-align:center;
+            margin-left:50%;
+            left:-250px;
+            bottom:10px;
+        }
+        .center
+        {
+            background-image:url('/scripts/resources/images/loginbg.png');
+            background-repeat:no-repeat;
+            width:410px;
+            height:410px;
+            margin-left:50%;
+            position:absolute;
+            left:-205px;
+            top:150px;
+            color:#fff;
+            text-align:center;
+            
+        }
+        .center .uname span
+        {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url('/scripts/resources/images/user.png');
+            background-repeat:no-repeat;
+            margin:5px;
+            
+        }
+        .center .pwd span
+        {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url('/scripts/resources/images/pwd.png');
+            background-repeat:no-repeat;
+            margin:5px;
+            
+        }
+        .center .remember 
+        {
+            padding-left:76px;
+            margin-bottom:20px;
+            text-align:left;
+        }
+        
+        .center .comname
+        {
+            font-size: 26px;
+            margin-bottom: 50px;
+            text-align: center;
+            text-shadow: 2px 2px #004F84;
+            color: #E4E4E4;
+            font-weight: bold;
+        }
+        .center .login .uname
+        {
+            margin: auto;
+            display: block;
+            height: 30px;
+            width: 250px;
+            margin-bottom: 30px;
+            border: 1px solid transparent;
+            box-shadow: 1px 1px #7CCAFF;
+            background-color: #006CB5;
+            color: #fff;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+        .center .login .pwd
+        {
+            margin: auto;
+            display: block;
+            height: 30px;
+            width: 250px;
+            margin-bottom: 10px;
+            border: 1px solid transparent;
+            box-shadow: 1px 1px #7CCAFF;
+            background-color: #006CB5;
+            color: #fff;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+        .center .uname input
+        {
+            border:0;
+            background-color: transparent;
+            width: 215px;
+            height: 27px;
+            margin: 1px 35px;
+            color:#fff;
+        }
+        .center .pwd input
+        {
+            border:0;
+            background-color: transparent;
+            width: 215px;
+            height: 27px;
+            margin: 1px 35px;
+            color:#fff;
+        }
+        .center button
+        {
+            display:block;
+            margin: auto;
+            width:252px;            
+            height: 35px;
+            border: 1px solid transparent;
+            background-color: #7ba865;
+            box-shadow:1px 1px #006CB5;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            color:#fff;
+            font-size: 10pt;
+            font-weight: bold;
+            
+        }
+        .center button span{
+            background-image:url('/scripts/resources/images/check.png');
+            background-repeat:no-repeat;            
+            width:100px;
+            height:32px;
+            position: absolute;
+            left: 170px;
+            margin-top: -7px;
+        }
+        .center .msg
+        {
+            color:Red;
+        }
+    </style>
+  
+</head>
+<body class="bg">
+    <div class="top">
+    请使用现代浏览器：google浏览器，360浏览器极速版，火狐浏览器
+    </div>
+
+    <div class="center">    
+        <div class="comname">用户登录</div>
+
+        <div class="login">
+            <form method="post" action="../login" >
+		{% csrf_token %}
+                <div class="uname"><span></span><input name="uname" /></div>
+                <div class="pwd"><span></span><input type="password" name="pwd" /></div>
+                <div class="remember"><input type="checkbox" name="remember"/>记住密码？</div>
+                <button type="submit"><span>登　录</span></button>            
+            </form>
+        </div>
+        <div class="msg">
+            
+        </div>
+    </div>
+    
+    <div class="bottom">
+        ©CopyRight 2002-2016 bojesoft Inc All Rights Reserved. <a href="http://www.gps-net.cn">bojesoft</a> 版权所有
+    </div>
+</body>
+</html>
