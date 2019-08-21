@@ -1,0 +1,69 @@
+import os
+import pymysql
+import re
+import prettytable as pt
+# 将导出的规则以字符串读入
+def read_file_as_str(file_path):
+    # 判断路径文件存在
+    if not os.path.isfile(file_path):
+        raise TypeError(file_path + " does not exist")
+    all_the_text = open(file_path,'r', encoding='UTF-8').read()
+    # print type(all_the_text)
+    return all_the_text
+
+# 用正则表达式提取所有引号内容并且去重
+def get_All(str1):
+	pattern=re.compile(r'\"([^/"]*)\"')
+	result=pattern.findall(str1)
+	return list(set(result))
+
+# 连接数据库查询并替换
+def replace(str1):
+	sql ='select name1 from ss.ss where name2="%s";'%(str1)
+	global Globals
+	global num
+	try:
+		cursor.execute(sql)
+		temp1='"%s"/*%s*/'%(cursor.fetchone()[0],str1)
+		temp2=r'\"(%s)\"'%(str1);
+		Globals=re.sub(temp2,temp1,Globals)
+		show(num,str1,temp1)
+		num=num+1
+	except:
+		#print("没有取到数据")
+		pass
+		
+#将替换完的内容写入到本地
+def save_to_file( contents):
+	try:
+		fh = open("Globals.xml", 'w',encoding='utf-8')
+		fh.write(contents)
+		fh.close()
+	except:
+		print("错误")
+
+#表格展示
+def show(num,str1,str2):
+	global tb
+	tb.add_row([num,'"%s"'%(str1), str2])	
+
+if __name__=="__main__":
+	num=1;
+	#初始化表格
+	tb = pt.PrettyTable()
+	tb.field_names = ["索引","替换前", "替换后"]
+	#获取规则字符串
+	Globals=read_file_as_str("1.xml")
+	#提取去重引号中的内容
+	mylist=get_All(Globals)
+	#初始化数据库连接
+	conn = pymysql.connect(host="127.0.0.1", user="root",password="",database="ss",charset="utf8")
+	cursor = conn.cursor()
+	for i in mylist:
+		replace(i)
+	print(tb)
+	#将Globals写入到文件
+	save_to_file(Globals)
+	#关闭数据库连接
+	cursor.close()
+	conn.close()
